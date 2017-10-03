@@ -1,21 +1,22 @@
-import _ from 'lodash';
-import d3 from 'd3';
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import _ from 'lodash';
+import * as d3 from 'd3';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 
-ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('root')
-);
-// function component() {
-  // let data = ['fuck', 'you', 'hire', 'me'];
-  // d3.select(".chart")
-  //   .selectAll("div")
-  //   .data(data)
-  //     .enter()
-  //     .append("div")
-  //     .style("width", function(d) { return d + "px"; })
-  //     .text(function(d) { return d; });
-// })
 
-// document.body.appendChild(component());
+function component() {
+  let data = [30, 86, 168, 281, 303, 365];
+  let element = document.createElement('div');
+  element.className = 'chart';
+  d3.select(element)
+    .selectAll("div")
+    .data(data)
+      .enter()
+      .append("div")
+      .style("width", function(d) { return d + "px"; })
+      .text(function(d) { return d; });
+
+  return element;
+}
+
+document.body.appendChild(component())
