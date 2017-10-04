@@ -9,11 +9,14 @@
     "babel-preset-react": "^6.24.1",
     "d3": "^4.11.0",
     "lodash": "^4.17.4",
+    "mtgsdk": "^0.3.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "webpack": "^3.6.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "json-loader": "^0.5.7",
     "webpack": "^3.6.0"
   },
   "scripts": {

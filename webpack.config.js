@@ -9,7 +9,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: [/\.jsx?$/, /\.js?$/],
+        test: [/\.jsx?$/, /\.js?$/, /\.json$/],
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: {
@@ -21,5 +21,11 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     extensions: [".js", ".jsx", "*"]
+  },
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   }
 };
