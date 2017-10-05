@@ -9,56 +9,45 @@ class Gatherer extends React.Component {
     super();
     this.state = {
       cards: [],
-      // data: [30, 86, 168, 281, 303, 365], // for d3
     }
   }
 
   componentDidMount() {
-    this.fetchCard();
+    this.fetchCard(1);
+    this.fetchCard(2);
+    this.fetchCard(3);
+    this.fetchCard(4);
   }
 
-  // componentDidUpdate() {
-  //
-  // }
-
-  // generateCard() {
-  //   d3.select('.chart')
-  //     .selectAll("div")
-  //     .data(this.state.cards)
-  //     .enter()
-  //     .append("div")
-  //     .style("width", el => el + "px")
-  //     .text(el => el)
-  // }
-
-  fetchCard() {
-    let cards = this.state.cards.slice();
+  fetchCard(cardId) {
+    let {cards} = this.state;
     let that = this;
-    mtg.card.find(3)
+    mtg.card.find(cardId)
     .then(result => {
       cards.push({imageUrl: result.card.imageUrl});
     }).then(() => {
       that.setState({cards});
-    })
+    });
   }
 
-  renderCard(imageUrl) {
-    return (
-      <Card imageUrl={imageUrl}></Card>
-    )
+  renderCards() {
+    const {cards} = this.state;
+    return cards.map((card, i) =>
+      <Card key={i} imageUrl={card.imageUrl}></Card>
+    );
   }
 
   render() {
     const {cards} = this.state;
-    if (cards.length === 0) {
+    if (cards.length) {
       return (
-        <div className='card-container'></div>
+        <div className='card-container'>
+          {this.renderCards()}
+        </div>
       )
     } else {
       return (
-        <div className='card-container'>
-          {this.renderCard(cards[0].imageUrl)}
-        </div>
+        <div className='card-container'></div>
       )
     }
   }
@@ -66,3 +55,15 @@ class Gatherer extends React.Component {
 }
 
 export default Gatherer;
+
+// data: [30, 86, 168, 281, 303, 365], // for d3
+
+// generateCard() {
+//   d3.select('.chart')
+//     .selectAll("div")
+//     .data(this.state.cards)
+//     .enter()
+//     .append("div")
+//     .style("width", el => el + "px")
+//     .text(el => el)
+// }
