@@ -1,5 +1,5 @@
 import React from 'react';
-import {values} from 'lodash';
+import { values } from 'lodash';
 import * as d3 from 'd3';
 import * as mtg from 'mtgsdk';
 import Card from './card';
@@ -19,7 +19,6 @@ class Gatherer extends React.Component {
 
   fetchCards(filterObj) {
     let cards = Object.assign({}, this.state.cards)
-
     // fetches mtg.io for cards based on a filter
     mtg.card.where(filterObj)
     .then(result => {
@@ -34,7 +33,12 @@ class Gatherer extends React.Component {
 
   renderCards(cards) {
     return _.values(cards).map((card) =>
-      <Card key={card.id} imageUrl={card.imageUrl}></Card>
+      <Card
+        key={card.id}
+        imageUrl={card.imageUrl}
+        cardInfo={card}
+      >
+      </Card>
     );
   }
 

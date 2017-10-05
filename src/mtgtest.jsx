@@ -1,4 +1,5 @@
 const mtg = require('mtgsdk')
+// this is just a file to test the MTG api
 
 class MTG {
   constructor() {
