@@ -28,7 +28,6 @@ class Gatherer extends React.Component {
       })
       this.setState({cards});
     })
-
   }
 
   renderCards(cards) {

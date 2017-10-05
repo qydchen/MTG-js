@@ -1,35 +1,38 @@
 import React from 'react';
 
-const Card = ({imageUrl, cardInfo}) => {
-  return (
-    <div
-      className='card'
-      style={{backgroundImage: `url(${imageUrl})`}}
-      multiverseid={cardInfo.multiverseid}
-      layout={cardInfo.layout}
-      manaCost={cardInfo.manaCost}
-      cmc={cardInfo.cmc}
-      colors={cardInfo.colors}
-      type={cardInfo.type}
-      types={cardInfo.types}
-      subtypes={cardInfo.subtypes}
-      rarity={cardInfo.rarity}
-      text={cardInfo.text}
-      flavor={cardInfo.flavor}
-      artist={cardInfo.artist}
-      number={cardInfo.number}
-      power={cardInfo.power}
-      toughness={cardInfo.toughness}
-      reserved={cardInfo.reserved}
-      rulings={cardInfo.rulings}
-      printings={cardInfo.printings}
-      originalText={cardInfo.originalText}
-      originalType={cardInfo.originalType}
-      legalities={cardInfo.legalities}
-      source={cardInfo.source}
-      set={cardInfo.set}
-    ></div>
-  )
+class Card extends React.Component {
+  constructor() {
+    super();
+  }
+
+  //standardize prop names to be all lowercase to avoid React errors
+  standardize(cardinfo) {
+    let standardized = {};
+    Object.keys(cardinfo).forEach(key => {
+      if (cardinfo[key] === true || cardinfo[key] === false) {
+        // handles value of reserved to be converted into a string
+        standardized[key.toLowerCase()] = String(cardinfo[key]);
+      } else {
+        // handles all keys that needs that needs to be lowercased
+        standardized[key.toLowerCase()] = cardinfo[key];
+      }
+    })
+    return standardized;
+  }
+
+  render() {
+    const {imageUrl, cardInfo} = this.props;
+    const standardizedCardInfo = this.standardize(cardInfo);
+    return (
+      <div
+        className='card'
+        style={{backgroundImage: `url(${imageUrl})`}}
+        {...standardizedCardInfo}
+        ></div>
+    )
+  }
 }
+
+
 
 export default Card;
