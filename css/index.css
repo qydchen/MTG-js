@@ -1,8 +1,4 @@
-.chart div {
-  font: 10px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  color: white;
+.card-container div {
+  padding: 14.5%;
+  background-repeat: no-repeat;
 }

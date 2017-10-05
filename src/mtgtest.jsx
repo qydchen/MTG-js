@@ -24,5 +24,5 @@ class MTG {
 
 export default MTG;
 
-// let generator = new MTG
-// generator.findCard(66);
+let generator = new MTG
+generator.findCard(66);

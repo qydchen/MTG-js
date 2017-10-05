@@ -2,7 +2,7 @@ import React from 'react';
 
 const Card = ({imageUrl}) => {
   return (
-    <div style={{backgroundImage: `url(${imageUrl})`}}></div>
+    <div className='card' style={{backgroundImage: `url(${imageUrl})`}}></div>
   )
 }
 
