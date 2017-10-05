@@ -1,4 +1,4 @@
-import * as mtg from 'mtgsdk';
+const mtg = require('mtgsdk')
 
 class MTG {
   constructor() {
@@ -6,11 +6,12 @@ class MTG {
     this.findSet = this.findSet.bind(this);
   }
 
-  findCard(cardId) {
-    mtg.card.find(cardId)
-    .then(result => {
-      console.log(result.card.name) // "Black Lotus"
-      console.log(result.card.imageUrl)
+  findCard() {
+    mtg.card.where({rarity: 'Mythic Rare'})
+    .then(cards => {
+      cards.map((card) => {
+        console.log(card.name)
+      })
     })
   }
 
@@ -22,7 +23,6 @@ class MTG {
   }
 }
 
-export default MTG;
 
 let generator = new MTG;
-generator.findCard(66, 55, 33);
+generator.findCard();

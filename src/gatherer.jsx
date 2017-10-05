@@ -1,5 +1,5 @@
 import React from 'react';
-// import { values } from 'lodash';
+import {values} from 'lodash';
 import * as d3 from 'd3';
 import * as mtg from 'mtgsdk';
 import Card from './card';
@@ -8,41 +8,42 @@ class Gatherer extends React.Component {
   constructor() {
     super();
     this.state = {
-      cards: [],
+      cards: {},
     }
+    this.count = 0;
   }
 
   componentDidMount() {
-    this.fetchCard(1);
-    this.fetchCard(2);
-    this.fetchCard(3);
-    this.fetchCard(4);
+    this.fetchCards({rarity: "Mythic Rare"});
   }
 
-  fetchCard(cardId) {
-    let {cards} = this.state;
-    let that = this;
-    mtg.card.find(cardId)
+  fetchCards(filterObj) {
+    let cards = Object.assign({}, this.state.cards)
+
+    // fetches mtg.io for cards based on a filter
+    mtg.card.where(filterObj)
     .then(result => {
-      cards.push({imageUrl: result.card.imageUrl});
-    }).then(() => {
-      that.setState({cards});
-    });
+      result.forEach((card) => {
+        cards[card.id] = card;
+        this.count += 1;
+      })
+      this.setState({cards});
+    })
+
   }
 
-  renderCards() {
-    const {cards} = this.state;
-    return cards.map((card, i) =>
-      <Card key={i} imageUrl={card.imageUrl}></Card>
+  renderCards(cards) {
+    return _.values(cards).map((card) =>
+      <Card key={card.id} imageUrl={card.imageUrl}></Card>
     );
   }
 
   render() {
     const {cards} = this.state;
-    if (cards.length) {
+    if (this.count) {
       return (
         <div className='card-container'>
-          {this.renderCards()}
+          {this.renderCards(cards)}
         </div>
       )
     } else {
@@ -57,6 +58,21 @@ class Gatherer extends React.Component {
 export default Gatherer;
 
 // data: [30, 86, 168, 281, 303, 365], // for d3
+
+// fetchCard(cardId) {
+//   const {cards} = this.state;
+//   const {query} = this
+//   mtg.card.find(cardId)
+//   .then(result => {
+//     let newCards = Object.assign({}, cards, {[result.card.name]: result.card})
+//     this.setState({cards: newCards});
+//   })
+  // mtg.card.find(cardId)
+  // .then(result => {
+  //   query[result.card.name] = result.card;
+  //   this.setState({cards: query});
+  // })
+// }
 
 // generateCard() {
 //   d3.select('.chart')
