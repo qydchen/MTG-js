@@ -14,7 +14,12 @@ class Gatherer extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchCards({rarity: "Mythic Rare"});
+    this.fetchCards({
+      rarity: "Mythic Rare",
+      // colors: "Black",
+      // type: "creature",
+      setName: "Ixalan",
+    });
   }
 
   fetchCards(filterObj) {

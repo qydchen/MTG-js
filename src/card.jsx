@@ -28,7 +28,7 @@ class Card extends React.Component {
         className='card'
         style={{backgroundImage: `url(${imageUrl})`}}
         {...standardizedCardInfo}
-        ></div>
+      ></div>
     )
   }
 }
